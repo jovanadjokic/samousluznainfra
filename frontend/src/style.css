@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* Duboka tamno-teget pozadina */
+  background-color: #0b132b; 
+  color: #ffffff; /* Čisto bela za glavni tekst */
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #ffffff; /* Naslov je sada snežno beo */
+  margin-bottom: 10px;
+}
+
+p.subtitle {
+  color: #8c9cb0; /* Prigušeno sivkasto-plava za podnaslov */
+  margin-bottom: 40px;
+  font-size: 0.95rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+button {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+  transform: translateY(-1px); /* Blagi efekat podizanja umesto opacity */
+}
+
+#btn-save {
+  background-color: #ffffff; /* Glavno dugme je čisto belo */
+  color: #0b132b; /* Tekst na dugmetu je teget */
+  font-weight: bold;
+}
+
+#btn-save:hover {
+  background-color: #e2e8f0; /* Blago siva nijansa na hover */
+}
+
+#btn-history {
+  background-color: #1c2541; /* Kontrastna teget boja */
+  color: #ffffff;
+  border: 1px solid #3a506b; /* Svetlija teget ivica */
+}
+
+#btn-history:hover {
+  background-color: #3a506b;
+}
+
+#message {
+  margin-bottom: 20px;
+  min-height: 24px;
+  color: #ffffff; /* Poruke su sada bele */
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+table {
+  width: 100%;
+  max-width: 860px;
+  border-collapse: collapse;
+  background-color: #111a36; /* Za nijansu svetlija teget za pozadinu tabele */
+  border-radius: 8px;
+  overflow: hidden; /* Da ivice tabele ostanu zaobljene */
+}
+
+th {
+  background-color: #1c2541; /* Teget zaglavlje */
+  color: #ffffff; /* Beli tekst u zaglavlju */
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #1c2541; /* Teget linije između redova */
+  font-size: 0.9rem;
+  color: #e2e8f0; /* Blago svetlosiva za podatke u tabeli (odlična čitljivost) */
+}
+
+tr:hover td {
+  background-color: #1c2541; /* Red svetli u teget boji kada se pređe mišem */
+}
+
+#table-wrapper {
+  display: none;
+  width: 100%;
+  max-width: 860px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Dodata senka za premijum izgled */
+}

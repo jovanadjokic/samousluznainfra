@@ -1,0 +1,50 @@
+name: 'server-monitor'
+
+services:
+  db:
+    image: postgres:16
+    container_name: monitor-db
+    env_file:
+      - ./env/db.env
+    networks:
+      - app-network
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U monitor_user -d monitor_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: ./app
+    container_name: monitor-app
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./env/app.env
+    networks:
+      - app-network
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    container_name: monitor-frontend
+    ports:
+      - "3001:80"
+    networks:
+      - app-network
+    depends_on:
+      - app
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  pg-data:
