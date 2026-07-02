@@ -29,8 +29,7 @@ Sve je maksimalno automatizovano kroz bash skripte. Nije potrebno ručno podeša
 Pratite sledeće korake u terminalu:
 
 ```bash
-# 1. Klonirajte repozitorijum direktno u vaš početni direktorijum (/home/student/) i uđite u folder
-cd /home/student/
+# 1. Klonirajte repozitorijum direktno u vaš početni direktorijum i uđite u folder
 git clone [https://github.com/jovanadjokic/samousluznainfra.git](https://github.com/jovanadjokic/samousluznainfra.git)
 cd samousluznainfra
 
