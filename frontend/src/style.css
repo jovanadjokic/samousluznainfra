@@ -108,5 +108,5 @@ tr:hover td {
   display: none;
   width: 100%;
   max-width: 860px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Dodata senka za premijum izgled */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); 
 }

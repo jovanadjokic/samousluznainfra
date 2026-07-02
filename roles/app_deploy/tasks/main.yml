@@ -1,0 +1,29 @@
+---
+
+- name: Kreiraj db.env fajl za bazu podataka
+  copy:
+    dest: "{{ project_path }}/env/db.env"
+    content: |
+      POSTGRES_USER={{ db_user }}
+      POSTGRES_PASSWORD={{ db_password }}
+      POSTGRES_DB={{ db_name }}
+    mode: '0600'
+
+
+- name: Kreiraj app.env fajl za backend aplikaciju
+  copy:
+    dest: "{{ project_path }}/env/app.env"
+    content: |
+      DB_USER={{ db_user }}
+      DB_PASSWORD={{ db_password }}
+      DB_NAME={{ db_name }}
+      DB_HOST={{ db_host }}
+      DB_PORT={{ db_port }}
+      NODE_ENV={{ node_env }}
+    mode: '0600'
+
+- name: Pokreni aplikaciju kroz Docker Compose
+  community.docker.docker_compose_v2:
+    project_src: "{{ project_path }}"
+    state: present
+    build: always

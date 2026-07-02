@@ -1,0 +1,24 @@
+---
+- name: Teardown - Gasenje i ciscenje celokupnog okruzenja
+  hosts: webservers
+  become: yes
+
+  vars_files:
+    - group_vars/all.yml
+
+  tasks:
+    - name: Ugasi Docker Compose kontejnere i obrisi volumene/mreze
+      community.docker.docker_compose_v2:
+        project_src: "{{ project_path }}"
+        state: absent
+        remove_volumes: true
+
+    - name: Obrisi generisane .env konfiguracione fajlove
+      file:
+        path: "{{ project_path }}/env/db.env"
+        state: absent
+
+    - name: Obrisi direktorijum sa podacima baze (potpuno ciscenje)
+      file:
+        path: "{{ db_data_path }}"
+        state: absent

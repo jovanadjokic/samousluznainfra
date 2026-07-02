@@ -1,0 +1,11 @@
+---
+project_path: "/home/student/samousluzna-infra"
+db_data_path: "/home/student/samousluzna-infra/pg-data"
+
+db_user: "monitor_user"
+db_password: "SuperSigurnaLozinka123!"  
+db_name: "monitor_db"
+db_host: "monitor-db"
+db_port: "5432"
+
+node_env: "production"

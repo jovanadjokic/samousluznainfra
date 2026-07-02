@@ -1,0 +1,8 @@
+---
+- name: Automatizacija infrastrukture i aplikacije
+  hosts: webservers
+  become: yes
+
+  roles:
+    - docker
+    - app_deploy
