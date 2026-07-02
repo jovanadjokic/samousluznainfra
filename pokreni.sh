@@ -7,4 +7,4 @@ echo "=== Korak 2: Instalacija Ansible Docker kolekcije ==="
 ansible-galaxy collection install community.docker
 
 echo "=== Korak 3: Pokretanje Ansible Playbook-a ==="
-ansible-playbook -i inventory.ini site.yml -Kba
+ansible-playbook -i inventory.ini site.yml -K -b
