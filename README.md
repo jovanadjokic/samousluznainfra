@@ -22,13 +22,22 @@ Ovaj projekat predstavlja potpuno automatizovano rešenje za podizanje i upravlj
 
 ---
 
-## Pokretanje i Korišćenje
+## Uputstvo za Korišćenje (Kloniranje, Pokretanje i Gašenje)
 
 Sve je maksimalno automatizovano kroz bash skripte. Nije potrebno ručno podešavati Docker ili kucati duge Ansible komande.
 
-### 1. Kloniranje i pozicioniranje
-Klonirajte repozitorijum direktno u vaš početni direktorijum (`/home/student/`):
+Pratite sledeće korake u terminalu:
+
 ```bash
+# 1. Klonirajte repozitorijum direktno u vaš početni direktorijum (/home/student/) i uđite u folder
 cd /home/student/
 git clone [https://github.com/jovanadjokic/samousluznainfra.git](https://github.com/jovanadjokic/samousluznainfra.git)
 cd samousluznainfra
+
+# 2. Pokrenite sistem (instalira Docker, konfiguriše .env fajlove i podiže sve kontejnere)
+# Napomena: Skripta će vas pitati za sudo lozinku kako bi Ansible mogao da instalira pakete.
+./pokreni.sh
+
+# 3. Ugasite i potpuno očistite sistem kada završite sa radom
+# Ova komanda briše kontejnere, mreže, generisane konfiguracije i trajne podatke iz baze.
+./zaustavi.sh
