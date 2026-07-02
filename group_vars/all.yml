@@ -1,6 +1,6 @@
 ---
-project_path: "/home/student/samousluzna-infra"
-db_data_path: "/home/student/samousluzna-infra/pg-data"
+project_path: "{{ playbook_dir }}"
+db_data_path: "{{ playbook_dir }}/pg-data"
 
 db_user: "monitor_user"
 db_password: "SuperSigurnaLozinka123!"  
