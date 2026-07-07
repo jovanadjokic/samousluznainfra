@@ -1,6 +1,5 @@
-
 ---
-- name: Ocisti sve moguce ostatke Docker repozitorijuma i kljuceva
+- name: Potpuno ocisti sve konfliktne fajlove Docker lista i kljuceva
   file:
     path: "{{ item }}"
     state: absent
@@ -10,13 +9,16 @@
     - /etc/apt/keyrings/docker.gpg
     - /etc/apt/keyrings/docker.asc
 
-- name: Ukloni Docker linije iz glavnog sources.list fajla ako postoje
-  ansible.builtin.replace:
-    path: /etc/apt/sources.list
-    regexp: '^.*docker\.com.*$'
-    replace: ''
+- name: Regenerisi cist sistemski sources.list fajl da se uklone skriveni konflikti
+  copy:
+    content: |
+      deb http://archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse
+      deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse
+      deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+      deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
+    dest: /etc/apt/sources.list
 
-- name: Prisilno ocisti apt i osvezi kes kroz ljusku
+- name: Prisilno osvezi apt kroz ljusku nakon kompletnog reseta
   shell: apt-get clean && apt-get update
   ignore_errors: yes
 
@@ -29,7 +31,7 @@
       - gnupg
       - lsb-release
     state: present
-    update_cache: yes
+    update_cache: no
 
 - name: Napravi direktorijum za GPG ključeve
   file:
@@ -45,7 +47,7 @@
 
 - name: Dodaj Docker repozitorijum u apt izvore
   apt_repository:
-    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu jammy stable"
     state: present
     filename: docker
 
@@ -58,7 +60,7 @@
       - docker-buildx-plugin
       - docker-compose-plugin
     state: present
-    update_cache: yes
+    update_cache: no
 
 - name: Osiguraj da je Docker servis pokrenut i omogućen
   service:
