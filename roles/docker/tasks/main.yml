@@ -1,4 +1,16 @@
 ---
+- name: Ocisti konfliktne staro-nove Docker APT izvore i kljuceve
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /etc/apt/sources.list.d/docker.list
+    - /etc/apt/keyrings/docker.gpg
+    - /etc/apt/keyrings/docker.asc
+
+- name: Osvezi apt kes nakon ciscenja konflicata
+  apt:
+    update_cache: yes
 
 - name: Instaliraj sistemske pakete potrebne za Docker
   apt:
@@ -17,20 +29,17 @@
     state: directory
     mode: '0755'
 
-
 - name: Dodaj zvanični Docker GPG ključ
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
     keyring: /etc/apt/keyrings/docker.gpg
 
-
 - name: Dodaj Docker repozitorijum u apt izvore
   apt_repository:
     repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_facts['distribution_release'] }} stable"
     state: present
     filename: docker
-
 
 - name: Instaliraj Docker i Docker Compose plugin
   apt:
@@ -42,7 +51,6 @@
       - docker-compose-plugin
     state: present
     update_cache: yes
-
 
 - name: Osiguraj da je Docker servis pokrenut i omogućen
   service:
