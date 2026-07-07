@@ -1,3 +1,4 @@
+---
 - name: Potpuno ocisti sve starije ili konfliktne Docker fajlove i ključeve
   file:
     path: "{{ item }}"
@@ -23,19 +24,19 @@
     state: directory
     mode: '0755'
  
-- name: Preuzmi svež Docker GPG ključ (Ovo rešava NO_PUBKEY grešku)
+- name: Preuzmi svež Docker GPG ključ 
   get_url:
     url: https://download.docker.com/linux/ubuntu/gpg
     dest: /etc/apt/keyrings/docker.asc
     mode: '0644'
-    force: yes  # Ako ključ ne postoji, preuzeće ga. Ako postoji, pregaziće ga ispravnim.
+    force: yes  
  
 - name: Dodaj Docker repozitorijum i odmah osveži apt bazu
   apt_repository:
     repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu jammy stable"
     state: present
     filename: docker
-    update_cache: yes  # Kada je ključ već na mestu, ovaj update prolazi 100% bez greške
+    update_cache: yes  
  
 - name: Instaliraj sistemske pakete potrebne za Docker
   apt:
